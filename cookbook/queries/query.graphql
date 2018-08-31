@@ -1,0 +1,18 @@
+query staQuery {
+  todo: allCategories {
+    id
+    ...elNombreMen
+  }
+  casitodo: allCategories {
+    ...elNombreMen
+  }
+  allIngredients {
+    id
+    name
+    notes
+  }
+}
+
+fragment elNombreMen on CategoryType {
+  name
+}

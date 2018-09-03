@@ -4,14 +4,25 @@
   "description": "playground for graphql",
   "private": true,
   "dependencies": {
-    "vue": "^2.5.17"
+    "apollo-cache-inmemory": "^1.2.9",
+    "apollo-client": "^2.4.1",
+    "apollo-link": "^1.2.2",
+    "apollo-link-http": "^1.5.4",
+    "graphql": "^14.0.0",
+    "graphql-tag": "^2.9.2",
+    "vue": "^2.5.17",
+    "vue-apollo": "^3.0.0-beta.21",
+    "vue-loader": "^15.4.1",
+    "webpack-dev-server": "^3.1.7"
   },
   "devDependencies": {
-    "webpack": "^4.17.1",
+    "webpack": "^4.17.2",
     "webpack-cli": "^3.1.0"
   },
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "build": "webpack",
+    "start": "webpack-dev-server"
   },
   "repository": {
     "type": "git",

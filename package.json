@@ -1,0 +1,27 @@
+{
+  "name": "graphqlplayground",
+  "version": "1.0.0",
+  "description": "playground for graphql",
+  "private": true,
+  "dependencies": {
+    "vue": "^2.5.17"
+  },
+  "devDependencies": {
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.0"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lferrario92/GraphQLplayground.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lferrario92/GraphQLplayground/issues"
+  },
+  "homepage": "https://github.com/lferrario92/GraphQLplayground#readme",
+  "keywords": []
+}

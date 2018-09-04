@@ -1,5 +1,7 @@
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
+
 module.exports = {
-	mode: 'production',
+	mode: 'development',
 	module: {
 		rules: [
 			{
@@ -16,6 +18,9 @@ module.exports = {
 		filename: 'index.js',
 		path: __dirname + '/cookbook/static',
 	},
+	plugins: [
+    new VueLoaderPlugin()
+  ],
 	devServer: {
 		publicPath: '/static/',
 		proxy: {

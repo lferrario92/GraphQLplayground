@@ -1,9 +1,7 @@
-function component() {
-  let element = document.createElement('div');
+import Vue from 'vue';
 
-  element.innerHTML = ['Hello', 'webszzzzzzssspack'].join(' ');
+import Playground from './Playground.vue';
 
-  return element;
-}
+const app = new Vue(Playground);
 
-document.body.appendChild(component());
+app.$mount('#app');

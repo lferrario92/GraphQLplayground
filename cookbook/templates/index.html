@@ -1,5 +1,6 @@
 {% load static %}
 <body>
-	<div></div>
+	<div id="app"></div>
 	<script src="{% static 'index.js' %}"></script>
+    {% csrf_token %}
 </body>

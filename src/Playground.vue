@@ -41,12 +41,11 @@ export default {
         men: {
             query: QuerySample,
             update: data => data,
-            prefetch: true,
         },
     },
     computed: {
         ingredients() {
-            return this.todo;
+            return this.men;
         }
     },
 };

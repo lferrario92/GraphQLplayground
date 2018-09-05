@@ -1,5 +1,5 @@
 query men {
-  todo: allCategories {
+  men: allCategories {
     id
     ...elNombreMen
   }

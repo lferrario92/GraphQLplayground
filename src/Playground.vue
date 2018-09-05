@@ -1,6 +1,8 @@
 <template>
     <div>
         test
+
+        {{ingredients}}
     </div>
 </template>
 
@@ -36,10 +38,16 @@ const apolloProvider = new VueApollo({
 export default {
     apolloProvider,
     apollo: {
-        gqlData: {
+        men: {
             query: QuerySample,
             update: data => data,
+            prefetch: true,
         },
+    },
+    computed: {
+        ingredients() {
+            return this.todo;
+        }
     },
 };
 

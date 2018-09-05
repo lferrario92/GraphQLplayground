@@ -1,4 +1,4 @@
-query staQuery {
+query men {
   todo: allCategories {
     id
     ...elNombreMen

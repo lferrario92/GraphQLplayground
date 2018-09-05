@@ -2,7 +2,11 @@
     <div>
         test
 
-        {{ingredients}}
+        {{men}}
+        <br>
+        <br>
+        <br>
+        {{casitodo}}
     </div>
 </template>
 
@@ -38,15 +42,8 @@ const apolloProvider = new VueApollo({
 export default {
     apolloProvider,
     apollo: {
-        men: {
-            query: QuerySample,
-            update: data => data,
-        },
-    },
-    computed: {
-        ingredients() {
-            return this.men;
-        }
+        men: QuerySample,
+        casitodo: QuerySample,
     },
 };
 

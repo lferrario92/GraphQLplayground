@@ -1,15 +1,12 @@
 query men {
-  men: allCategories {
+  men: allIngredients {
     id
-    ...elNombreMen
+    category {
+      ...elNombreMen
+    }
   }
   casitodo: allCategories {
-    ...elNombreMen
-  }
-  allIngredients {
-    id
-    name
-    notes
+      ...elNombreMen
   }
 }
 

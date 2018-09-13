@@ -1,13 +1,42 @@
-<template>
-    <div>
-        test
+<style scoped>
+.container {
+  display: flex;
+  flex-direction: row;
+}
+.list-container {
+  max-width: 50%;
+  width: 100%;
+}
+.bold {
+  font-weight: 600;
+}
+</style>
 
-        {{men}}
-        <br>
-        <br>
-        <br>
-        {{casitodo}}
+<template>
+  <section>
+  <h1>Playground</h1>
+  <div class="container">
+    <div class="list-container">
+      <h2>Ingredients</h2>
+      <ul>
+        <li v-for="ingredient in ingredients" :key="ingredient.id">
+          {{ ingredient.id }} -
+          <span class="bold">{{ ingredient.name }}</span>
+          ({{ ingredient.category.name }})
+        </li>
+      </ul>
     </div>
+    <div class="list-container">
+      <h2>Categories</h2>
+      <ul>
+        <li v-for="category in categories" :key="category.id">
+          {{ category.id }} -
+          <span class="bold">{{ category.name }}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  </section>
 </template>
 
 
@@ -42,8 +71,8 @@ const apolloProvider = new VueApollo({
 export default {
     apolloProvider,
     apollo: {
-        men: QuerySample,
-        casitodo: QuerySample,
+        ingredients: QuerySample,
+        categories: QuerySample,
     },
 };
 

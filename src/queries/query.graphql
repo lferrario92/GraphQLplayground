@@ -1,15 +1,17 @@
 query men {
-  men: allIngredients {
+  ingredients: allIngredients {
     id
+    name
     category {
-      ...elNombreMen
+      ...commonFields
     }
   }
-  casitodo: allCategories {
-      ...elNombreMen
+  categories: allCategories {
+      ...commonFields
   }
 }
 
-fragment elNombreMen on CategoryType {
+fragment commonFields on CategoryType {
+  id
   name
 }

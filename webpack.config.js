@@ -11,7 +11,14 @@ module.exports = {
 			{
 				test: /\.graphql$/,
 				use: 'graphql-tag/loader',
-			},
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'vue-style-loader',
+          'css-loader'
+        ]
+      }
 		],
 	},
 	output: {

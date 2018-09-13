@@ -1,16 +1,27 @@
-# GraphQLplayground
-Graphql test project as playground
+# Django Vue SSR Playground
 
-To get the thing going:
-1) source env/bin/activate
-2) pip install -r requirements.txt
-3) python manage.py runserver
+This repo is a how-to server render a Vue App using Django.
 
-Then, while the django server is running:
-1) npm install
-2) npm start
-3) go to localhost:8080
+## Installation
+This project runs under ```python```, so you need to have installed ```virtualenv``` to isolate the dependencies. To build frontend and run render server you should have installed ```NodeJS``` and ```npm```.
 
-The url for graphql is localhost:8080/graphql
+```bash
+$ git clone https://github.com/marcopuccio/django-vue-ssr-playground
+$ cd django-vue-ssr-playground
+$ virtualenv env
+$ source env/bin/activate
+$ pip install -r requirements.txt
+$ npm install
+```
 
-Enjoy
+## Run
+Open your term and start the python server.
+```bash
+$ source env/bin/activate
+$ python manage.py runserver
+```
+Then, open other term and init dev server with npm and webpack
+```bash
+$ npm start
+```
+After all, navigate to ```http://localhost:8080```.

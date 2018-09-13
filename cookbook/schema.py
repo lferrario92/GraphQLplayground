@@ -1,9 +1,9 @@
 import graphene
 
-import cookbook.ingredients.schema
+from ingredients.schema import Query as IngredientsQuery
 
 
-class Query(cookbook.ingredients.schema.Query, graphene.ObjectType):
+class Query(IngredientsQuery, graphene.ObjectType):
     """
     This class will inherit from multiple Query Objects from other
     projects as we begin to add more apps to our it and expose graphql

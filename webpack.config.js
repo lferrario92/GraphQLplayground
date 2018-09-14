@@ -1,7 +1,7 @@
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
-  entry: './front/index.js',
+  entry: './front/vueApp/index.js',
   mode: 'development',
 	module: {
 		rules: [

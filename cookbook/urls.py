@@ -21,8 +21,7 @@ from graphene_django.views import GraphQLView
 
 
 urlpatterns = [
-    url(r'^$', RedirectView.as_view(pattern_name='ingredients:index')),
     url(r'^admin', admin.site.urls),
     url(r'^graphql', GraphQLView.as_view(graphiql=True)),
-    url(r'^ingredients', include('ingredients.urls', namespace='ingredients')),
+    url(r'^', include('front.urls', namespace='front')),
 ]

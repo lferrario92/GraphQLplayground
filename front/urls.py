@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url
 
-from ingredients import views
+from front import views
 
 urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='index'),
-    url(r'^csr', views.CSRView.as_view(), name='csr'),
+    url(r'^csr/', views.CSRView.as_view(), name='csr'),
 ]

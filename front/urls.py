@@ -13,15 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url, include
-from django.contrib import admin
-from django.views.generic import RedirectView
+from django.conf.urls import url
 
-from graphene_django.views import GraphQLView
-
+from front import views
 
 urlpatterns = [
-    url(r'^admin', admin.site.urls),
-    url(r'^graphql', GraphQLView.as_view(graphiql=True)),
-    url(r'^', include('front.urls', namespace='front')),
+    url(r'^$', views.IndexView.as_view(), name='index'),
+    url(r'^csr/', views.CSRView.as_view(), name='csr'),
 ]

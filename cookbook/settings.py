@@ -37,10 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'cookbook.ingredients',
-    'cookbook',
     'graphene_django',
-    'django_extensions'
+    'django_extensions',
+    'front.apps.FrontConfig',
+    'ingredients.apps.IngredientsConfig',
 ]
 
 MIDDLEWARE = [

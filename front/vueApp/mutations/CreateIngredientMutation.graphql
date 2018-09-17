@@ -1,0 +1,6 @@
+mutation addIngredient($name: String, $notes: String, $category: ID) {
+  createIngredient(name: $name, notes: $notes, category: $category) {
+    ok
+    errors
+  }
+}

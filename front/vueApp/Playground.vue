@@ -10,6 +10,19 @@
 .bold {
   font-weight: 600;
 }
+
+.labelMen > input {
+  border-radius: 4px;
+  border:  solid 1px #ddd;
+  padding: 5px;
+}
+
+.labelMen > select {
+  border-radius: 4px;
+  border:  solid 1px #ddd;
+  padding: 5px;
+}
+
 </style>
 
 <template>
@@ -18,12 +31,27 @@
   <div class="container">
     <div>
       <h2>Add ingredient Men</h2>
-      <form>
-        <label for=""><input placeholder="Name" type="text"></label>
-        <label for=""><input placeholder="Notes" type="text"></label>
-        <label for="">
-          <select name="" id="">
-            <option value="">cats</option>
+      <form v-on:submit.prevent="createIngredientMutation">
+        <label class="labelMen">
+          <input 
+            placeholder="Name" 
+            type="text"
+            v-model="ingredient_name"
+            >
+        </label>
+        <label class="labelMen">
+          <input 
+            placeholder="Notes" 
+            type="text"
+            v-model="notes"
+            >
+        </label>
+        <label class="labelMen">
+          <select v-model="category">
+            <option 
+              v-for="cat in categories"
+              :value="cat"
+              >{{ cat.name }}</option>
           </select>
         </label>
         <button type="submit">subMen</button>
@@ -64,6 +92,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import VueApollo from 'vue-apollo'
 
 import QuerySample from './queries/query.graphql'
+import CreateIngredientMutation from './mutations/CreateIngredientMutation.graphql'
 
 Vue.use(VueApollo)
 
@@ -84,11 +113,38 @@ const apolloProvider = new VueApollo({
 })
 
 export default {
-    apolloProvider,
-    apollo: {
-        ingredients: QuerySample,
-        categories: QuerySample,
-    },
+  apolloProvider,
+  apollo: {
+      ingredients: QuerySample,
+      categories: QuerySample,
+  },
+  data: {
+    form_data: {},
+    ingredient_name: null,
+    notes: null,
+    category: Number,
+  },
+  methods: {
+   createIngredientMutation: function() {
+    if(!this.ingredient_name || !this.notes) {
+      alert('no men');
+      return false;
+    }
+    const form_data = {
+      ingredient_name: this.ingredient_name,
+      notes: this.notes,
+      category: this.category,
+    };
+    this.$apollo.mutate({
+      mutation: CreateIngredientMutation,
+      variables: {
+        name: form_data.ingredient_name,
+        notes: form_data.notes,
+        category: form_data.category.id,
+      },
+    });
+   },
+  },
 };
 
 function customFetchWithCsrfToken(uri, options) {

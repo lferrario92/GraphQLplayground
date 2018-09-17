@@ -3,6 +3,7 @@ import graphene
 from graphene_django.types import DjangoObjectType
 
 from ingredients.models import Category, Ingredient
+from forms import IngredientForm
 
 
 class CategoryType(DjangoObjectType):
@@ -15,6 +16,20 @@ class IngredientType(DjangoObjectType):
         model = Ingredient
 
 
+class AnyType(graphene.Scalar):
+    @staticmethod
+    def serialize(value):
+        return value
+
+    @staticmethod
+    def parse_value(value):
+        return value
+
+    @staticmethod
+    def parse_literal(ast):
+        return ast.value
+
+
 class Query(object):
     all_categories = graphene.List(CategoryType)
     all_ingredients = graphene.List(IngredientType)
@@ -25,3 +40,31 @@ class Query(object):
     def resolve_all_ingredients(self, info, **kwargs):
         # We can easily optimize query count in the resolve method
         return Ingredient.objects.select_related('category').all()
+
+
+class CreateIngredientMutation(graphene.Mutation):
+    class Arguments:
+        name = graphene.String()
+        notes = graphene.String()
+        category = graphene.ID()
+
+    ok = graphene.Boolean()
+    errors = AnyType()
+    ingredient = graphene.Field(IngredientType)
+
+    def mutate(self, info, **kwargs):
+        form = IngredientForm(kwargs)
+
+        ok = form.is_valid()
+        if ok:
+            ingredient = form.save()
+
+        return CreateIngredientMutation(
+            ok=ok,
+            errors=form.errors or None,
+            ingredient=ingredient,
+        )
+
+
+class Mutation(object):
+    create_ingredient = CreateIngredientMutation.Field()

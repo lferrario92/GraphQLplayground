@@ -16,6 +16,21 @@
   <section>
   <h1>Playground</h1>
   <div class="container">
+    <div>
+      <h2>Add ingredient Men</h2>
+      <form>
+        <label for=""><input placeholder="Name" type="text"></label>
+        <label for=""><input placeholder="Notes" type="text"></label>
+        <label for="">
+          <select name="" id="">
+            <option value="">cats</option>
+          </select>
+        </label>
+        <button type="submit">subMen</button>
+      </form>
+    </div>
+  </div>
+  <div class="container">
     <div class="list-container">
       <h2>Ingredients</h2>
       <ul>

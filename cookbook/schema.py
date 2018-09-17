@@ -1,6 +1,9 @@
 import graphene
 
-from ingredients.schema import Query as IngredientsQuery
+from ingredients.schema import (
+    Query as IngredientsQuery,
+    Mutation as IngredientsMutation,
+)
 
 
 class Query(IngredientsQuery, graphene.ObjectType):
@@ -12,4 +15,11 @@ class Query(IngredientsQuery, graphene.ObjectType):
     pass
 
 
-schema = graphene.Schema(query=Query)
+class Mutation(IngredientsMutation, graphene.ObjectType):
+    pass
+
+
+schema = graphene.Schema(
+    query=Query,
+    mutation=Mutation,
+)

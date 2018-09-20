@@ -1,6 +1,7 @@
 env
 node_modules
 .vscode
+*.sqlite3
 
 # Editor Garbage
 *.swn

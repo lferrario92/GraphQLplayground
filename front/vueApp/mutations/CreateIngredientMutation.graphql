@@ -4,6 +4,10 @@ mutation addIngredient($name: String, $notes: String, $category: ID) {
     errors
     ingredient {
     	...commonIngredientFields
+    	category {
+    		id
+    		name
+    	}
     }
   }
 }

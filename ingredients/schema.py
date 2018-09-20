@@ -55,6 +55,9 @@ class CreateIngredientMutation(graphene.Mutation):
     def mutate(self, info, **kwargs):
         form = IngredientForm(kwargs)
 
+        # definir antes ingredient, para que el caso de que ok sea False, 
+        # ingredient tenga un valor definido
+        ingredient = None
         ok = form.is_valid()
         if ok:
             ingredient = form.save()

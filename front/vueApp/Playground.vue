@@ -1,5 +1,6 @@
 <style scoped>
 .container {
+  font-family: 'Quicksand' !important;
   display: flex;
   flex-direction: row;
 }
@@ -11,16 +12,97 @@
   font-weight: 600;
 }
 
+ul {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.IdMen {
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  color: white;
+  background: red;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+}
+
+li {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  width: 90px;
+  padding: 5px;
+  border: solid 1px #ddd;
+  margin: 5px;
+}
+
+p {
+  margin: 0;
+}
+
+.labelMen {
+  width: 100%;
+  max-width: 220px;
+}
+
 .labelMen > input {
   border-radius: 4px;
   border:  solid 1px #ddd;
   padding: 5px;
+  height: 30px;
+  margin-bottom: 10px;
 }
 
 .labelMen > select {
+  margin-bottom: 10px;
   border-radius: 4px;
   border:  solid 1px #ddd;
   padding: 5px;
+  width: 100%;
+  max-width: 220px;
+  height: 30px;
+  background: white;
+}
+
+.submenButton {
+  background: red;
+  color: white;
+  border-radius: 4px;
+  height: 30px;
+  font-size: 14px;
+  border: none;
+  width: 100%;
+  max-width: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 </style>
@@ -29,7 +111,7 @@
   <section>
   <h1>Playground</h1>
   <div class="container">
-    <div>
+    <div class="formContainer">
       <h2>Add ingredient Men</h2>
       <form v-on:submit.prevent="createIngredientMutation">
         <label class="labelMen">
@@ -54,7 +136,7 @@
               >{{ cat.name }}</option>
           </select>
         </label>
-        <button type="submit">subMen</button>
+        <button class="submenButton" type="submit">subMen</button>
       </form>
     </div>
   </div>
@@ -63,9 +145,13 @@
       <h2>Ingredients</h2>
       <ul>
         <li v-for="ingredient in ingredients" :key="ingredient.id">
-          {{ ingredient.id }} -
+          <p class="IdMen">
+            {{ ingredient.id }}
+          </p>
           <span class="bold">{{ ingredient.name }}</span>
-          ({{ ingredient.category.name }})
+          <span style="color: blue">
+            ({{ ingredient.category.name }})
+          </span>
         </li>
       </ul>
     </div>
@@ -73,7 +159,9 @@
       <h2>Categories</h2>
       <ul>
         <li v-for="category in categories" :key="category.id">
-          {{ category.id }} -
+          <p class="IdMen" style="background: blue">
+            {{ category.id }}
+          </p>
           <span class="bold">{{ category.name }}</span>
         </li>
       </ul>
@@ -135,6 +223,7 @@ export default {
       notes: this.notes,
       category: this.category,
     };
+
     this.$apollo.mutate({
       mutation: CreateIngredientMutation,
       variables: {
@@ -142,6 +231,26 @@ export default {
         notes: form_data.notes,
         category: form_data.category.id,
       },
+      update: (store, { data: { createIngredient: { ingredient } } }) => {
+        if (ingredient) {
+          const data = store.readQuery({ query: QuerySample });
+          data.ingredients.push(ingredient);
+          store.writeQuery({ query: QuerySample, data })
+        }
+      },
+      optimisticResponse: {
+        createIngredient: {
+          ok: true,
+          errors: null,
+          ingredient: {
+            id: '-1',
+            name: form_data.ingredient_name,
+            __typename: 'IngredientType',
+            category: form_data.category,
+          },
+          __typename: 'CreateIngredientMutation',
+        }
+      }
     });
    },
   },

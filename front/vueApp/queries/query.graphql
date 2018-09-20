@@ -1,17 +1,21 @@
 query men {
   ingredients: allIngredients {
-    id
-    name
+    ...commonIngredientFields
     category {
-      ...commonFields
+      ...commonCategoryFields
     }
   }
   categories: allCategories {
-      ...commonFields
+      ...commonCategoryFields
   }
 }
 
-fragment commonFields on CategoryType {
+fragment commonCategoryFields on CategoryType {
+  id
+  name
+}
+
+fragment commonIngredientFields on IngredientType {
   id
   name
 }

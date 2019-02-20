@@ -37,10 +37,27 @@ form {
 
 .IdMen {
   position: absolute;
-  top: -8px;
-  left: -8px;
+  top: -1px;
+  left: -1px;
   color: white;
   background: red;
+  border: solid 1px #ddd;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+}
+
+.deleteItem {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  cursor: pointer;
+  color: #464646;
+  background: #ddd;
+  border: solid 1px #464646;
   border-radius: 50%;
   width: 20px;
   height: 20px;
@@ -58,7 +75,7 @@ li {
   justify-content: center;
   align-items: center;
   width: 90px;
-  padding: 5px;
+  padding: 10px;
   border: solid 1px #ddd;
   margin: 5px;
 }
@@ -136,7 +153,7 @@ p {
               >{{ cat.name }}</option>
           </select>
         </label>
-        <button class="submenButton" type="submit">subMen</button>
+        <button class="submenButton" type="submit">Submit</button>
       </form>
     </div>
   </div>
@@ -152,6 +169,12 @@ p {
           <span style="color: blue">
             ({{ ingredient.category.name }})
           </span>
+          <div 
+            class="deleteItem"
+            @click="deleteMe(ingredient.id, ingredient.name)"
+            >
+            X
+          </div>
         </li>
       </ul>
     </div>
@@ -181,6 +204,7 @@ import VueApollo from 'vue-apollo'
 
 import QuerySample from './queries/query.graphql'
 import CreateIngredientMutation from './mutations/CreateIngredientMutation.graphql'
+import DeleteIngredientMutation from './mutations/DeleteIngredientMutation.graphql'
 
 Vue.use(VueApollo)
 
@@ -253,6 +277,14 @@ export default {
       }
     });
    },
+   deleteMe: function(id) {
+    this.$apollo.mutate({
+      mutation: DeleteIngredientMutation,
+      variables: {
+        ingredientId: id,
+      }
+    });
+   }
   },
 };
 

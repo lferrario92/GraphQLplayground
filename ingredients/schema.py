@@ -69,5 +69,35 @@ class CreateIngredientMutation(graphene.Mutation):
         )
 
 
+class DeleteIngredientMutation(graphene.Mutation):
+    class Arguments:
+        ingredientId = graphene.ID()
+
+    ok = graphene.Boolean()
+    errors = AnyType()
+    ingredient = graphene.Field(IngredientType)
+    ingredient_name = graphene.String()
+
+    def mutate(self, info, **kwargs):
+        ingredient = Ingredient.objects.get(id=kwargs['ingredientId'])
+        ingredient_name = ingredient.name
+
+        if ingredient:
+            print("exists!")
+            ok = True
+            errors = None
+            ingredient.delete()
+        else:
+            ok = False
+            errors = "Error"
+
+
+        return DeleteIngredientMutation(
+            ok=ok,
+            errors=errors,
+            ingredient_name=ingredient_name
+        )
+
 class Mutation(object):
     create_ingredient = CreateIngredientMutation.Field()
+    delete_ingredient = DeleteIngredientMutation.Field()

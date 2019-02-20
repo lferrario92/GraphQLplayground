@@ -1,0 +1,7 @@
+mutation eraseIngredient($ingredientId: ID!) {
+  deleteIngredient(ingredientId: $ingredientId) {
+    ok
+    errors
+    ingredientName
+  }
+}

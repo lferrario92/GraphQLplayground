@@ -129,7 +129,7 @@ p {
   <h1>Playground</h1>
   <div class="container">
     <div class="formContainer">
-      <h2>Add ingredient Men</h2>
+      <h2>Add ingredient</h2>
       <form v-on:submit.prevent="createIngredientMutation">
         <label class="labelMen">
           <input 
